@@ -40,6 +40,8 @@ void left_shift();
 void right_shift();
 void insert_in_sortedarray( int k);
 int check_if_sort();
+void single_missing_element();
+void multiple_missing_element();
 };
 
 void array::display(){
@@ -192,6 +194,37 @@ int array::check_if_sort(){
     }
     return 0;
 }
+void array::single_missing_element(){
+    int l,h,n,i;
+    int diff=0;
+    h=a[length-1];
+    l=a[0];
+
+
+    diff=l-0;
+    for(int i=0;i<length;i++){
+        if(a[i]-i!=diff){
+            cout<<"missing element is"<<i+diff<<endl;
+            break;   
+        }
+    }
+}
+void array::multiple_missing_element(){
+    int diff,i,n,l,h;
+    l=a[0];
+    h=a[length-1];
+    n=length;
+    diff=l-0;
+    for(i=0;i<n;i++){
+        if(a[i]-i!=diff){
+            while(diff<a[i]-i){
+                cout<<"missing elements are"<<i+diff<<endl;
+                diff++;
+            }
+        }
+    }
+
+}
 int main(){
     array *arr;
     int ch,sz;
@@ -212,7 +245,9 @@ int main(){
         cout<<endl<<"7.reverse"<<endl;
         cout<<endl<<"8.sum"<<endl;
         cout<<endl<<"9.check"<<endl;
-        cout<<endl<<"10.display"<<endl;
+        cout<<endl<<"10.missing element"<<endl;
+        cout<<endl<<"11.multiple missing element"<<endl;
+        cout<<endl<<"12.display"<<endl;
         cout<<endl;
         
 
@@ -271,8 +306,16 @@ int main(){
             case 9: cout<<endl;
                cout<<"value returned is"<<" "<<arr->check_if_sort()<<endl;
                 break;
+
+            case 10: cout<<endl;
+               arr->single_missing_element();
+                break;
+
+            case 11:cout<<endl;
+                arr->multiple_missing_element();
+                break;
                     
-            case 10: arr->display();
+            case 12: arr->display();
                 
         }
     }

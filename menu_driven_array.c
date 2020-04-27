@@ -150,6 +150,41 @@ int check_if_sort(struct array *arr){
 
     }
 }
+void misssing_element(struct array arr){
+int l,h,n,i;
+    int diff=0;
+    h=arr.a[arr.length-1];
+    l=arr.a[0];
+
+
+    diff=l-0;
+    for(int i=0;i<arr.length;i++){
+        if(arr.a[i]-i!=diff){
+            printf("missing element is %d\n", i+diff);
+            break;   
+        }
+    }
+    
+}
+void multiple_missing(struct array arr){
+    int l,h,n,count=0;
+    int diff;
+    int i;
+    l=arr.a[0];
+    h=arr.a[arr.length-1];
+    
+   
+    diff=l-0;
+    for(i=0;i<arr.length;i++){
+        if(arr.a[i]!=diff){
+            while(diff<arr.a[i]-i){
+                printf("missing values are %d\n",i+diff);
+                diff++;
+            }
+        }
+    }
+
+}
 int main(){
     struct array arr;
     int ch;
@@ -173,7 +208,9 @@ int main(){
         printf("7.Reverse The Array\n");
         printf("8.Sum of The Array\n");
         printf("9.check array\n");
-        printf("10.Display The Array\n");
+        printf("10.missing single\n");
+        printf("11.multiple missing single\n");
+        printf("12.Display The Array\n");
 
 
         printf("enter your choice\n");
@@ -230,8 +267,17 @@ int main(){
             case 9: printf("\n");
                printf("value returned is %d ",check_if_sort(&arr));
                 break;
+
+            case 10: printf("\n");
+               misssing_element(arr);
+               
+                break;
+            case 11: printf("\n");
+               multiple_missing(arr);
+               
+                break;
                     
-            case 10: display(arr);
+            case 12: display(arr);
                 
         }
     }
