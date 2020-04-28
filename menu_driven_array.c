@@ -84,23 +84,23 @@ int set(struct array *arr,int index, int x){
     return arr->a[index]=x;
     
 }
-void max(struct array arr){
+int max(struct array arr){
    int maxx=arr.a[0];
     for(int i=1;i<arr.length;i++){
             if(arr.a[i]>maxx){
             maxx=arr.a[i];
         }
     }
-    printf("the maximum element is %d",maxx);
+    return maxx;
 }
-void min(struct array arr){
+int min(struct array arr){
     int minn=arr.a[0];
     for(int i=0;i<arr.length;i++){
         if(arr.a[i]<minn){
             minn=arr.a[i];
         }
     }
-    printf("the minimum element is %d",minn);
+    return minn;
 }
 void sum(struct array arr){
     int total=0;
@@ -150,7 +150,7 @@ int check_if_sort(struct array *arr){
 
     }
 }
-void misssing_element(struct array arr){
+void misssing_element_sorted(struct array arr){
 int l,h,n,i;
     int diff=0;
     h=arr.a[arr.length-1];
@@ -166,7 +166,7 @@ int l,h,n,i;
     }
     
 }
-void multiple_missing(struct array arr){
+void multiple_missing_sorted(struct array arr){
     int l,h,n,count=0;
     int diff;
     int i;
@@ -185,6 +185,37 @@ void multiple_missing(struct array arr){
     }
 
 }
+void sigle_dupli(struct array arr){
+    int lastduplicate;
+    for(int i=0;i<arr.length;i++){
+        if((arr.a[i]==arr.a[i+1])&&(arr.a[i]!=lastduplicate)){
+            printf("single duplicate found is %d\n",arr.a[i]);
+            lastduplicate=arr.a[i];
+        }
+    }
+
+}
+void missing_unsorted(struct array arr){
+    int n,l,h;
+    n=arr.length;
+    h=max(arr);
+    l=min(arr);
+    struct array *arr3=(struct array *)malloc(sizeof(struct array));
+    arr3->length=h;
+    for(int i=0;i<arr.length;i++){
+       arr3->a[i]=0;
+       
+    }
+    for(int i=0;i<arr.length;i++){
+       arr3->a[arr.a[i]]++;
+       
+    }
+    for(int i=l;i<=h;i++){
+        if(arr3->a[i]==0){
+            printf("missing value is %d\n",i);
+        }
+    }
+}
 int main(){
     struct array arr;
     int ch;
@@ -194,6 +225,8 @@ int main(){
 
     arr.a=(int *)malloc(arr.size*sizeof(int));
     arr.length=0;
+
+    struct array *arr3;
 
 
     while(1){
@@ -210,7 +243,8 @@ int main(){
         printf("9.check array\n");
         printf("10.missing single\n");
         printf("11.multiple missing single\n");
-        printf("12.Display The Array\n");
+        printf("12.missing element in unsorted arary\n");
+        printf("13.Display The Array\n");
 
 
         printf("enter your choice\n");
@@ -269,15 +303,18 @@ int main(){
                 break;
 
             case 10: printf("\n");
-               misssing_element(arr);
+               misssing_element_sorted(arr);
                
                 break;
             case 11: printf("\n");
-               multiple_missing(arr);
-               
+               multiple_missing_sorted(arr);
+               break;
+
+            case 12: printf("\n");
+               missing_unsorted(arr);
                 break;
                     
-            case 12: display(arr);
+            case 13: display(arr);
                 
         }
     }
